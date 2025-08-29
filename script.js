@@ -6,22 +6,32 @@
 
 
 getComputerChoice();
+getHumanChoice();
+
+let humanScore = 0;
+let computerScore = 0;
 
 function getComputerChoice () {
     let choiceValue = parseInt(Math.random()*10)%3;
-    let computerChoice = 'Rock';
+    let computerChoice = 'rock';
 
     switch (choiceValue) {
         case 0: 
-            computerChoice = 'Rock';
+            computerChoice = 'rock';
             break;
         case 1: 
-            computerChoice = 'Paper';
+            computerChoice = 'paper';
             break;
         case 2: 
-            computerChoice = 'Scissors';
+            computerChoice = 'scissors';
             break;
     }
     console.log(choiceValue);
     console.log(computerChoice);
+}
+
+function getHumanChoice () {
+    let humanInput = prompt ("Rock, Paper or Scissors?", '');
+    let humanChoice = humanInput.toLowerCase();
+    console.log(humanChoice);
 }

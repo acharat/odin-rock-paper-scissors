@@ -7,7 +7,7 @@
 
 let humanScore = 0;
 let computerScore = 0;
-playRound();
+playGame();
 
 function getComputerChoice () {
     let choiceValue = parseInt(Math.random()*10)%3;
@@ -24,7 +24,7 @@ function getComputerChoice () {
             computerChoice = 'scissors';
             break;
     }
-    console.log(choiceValue);
+    console.log('Random Number : ' + choiceValue);
     
     return computerChoice;
 }
@@ -36,7 +36,9 @@ function getHumanChoice () {
     return humanChoice;
 }
 
-function playRound () {
+function playRound (round) {
+
+    console.log ('-----ROUND NO.' + round + '-----')
 
     let computerChoice = getComputerChoice();
     let humanChoice = getHumanChoice();
@@ -45,9 +47,9 @@ function playRound () {
     console.log('Human Choice : ' + humanChoice);
 
     if (computerChoice == humanChoice) {
-        humanScore = 0;
-        computerScore = 0;
-    } else {
+
+    } else if (humanChoice == 'rock' || humanChoice == 'paper' || humanChoice == 'scissors'){
+            round++;
             switch (computerChoice) {
                 case 'rock': 
                 switch (humanChoice) {
@@ -81,8 +83,26 @@ function playRound () {
                 break;
 
             }
+    } else {
+        
     }
 
     console.log('Human : ' + humanScore + ' ; Computer : ' + computerScore);
+    return round;
 
 }
+
+function playGame () {
+    
+
+        for (round = 0 ; round < 5; ) {
+            round = playRound(round);
+            console.log('Round: ' + round);
+        }
+
+        if (humanScore > computerScore) {
+            console.log ('Congratulations!! YOU WIN '+ humanScore + ':' + computerScore + '!!!');
+        } else {
+            console.log('Boo Hoo! YOU LOSE ' + humanScore + ':' + computerScore + '!!');
+        }
+        }

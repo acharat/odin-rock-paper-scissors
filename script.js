@@ -5,11 +5,9 @@
 //PLAY Game -> Total of 5 rounds
 
 
-getComputerChoice();
-getHumanChoice();
-
 let humanScore = 0;
 let computerScore = 0;
+playRound();
 
 function getComputerChoice () {
     let choiceValue = parseInt(Math.random()*10)%3;
@@ -27,11 +25,64 @@ function getComputerChoice () {
             break;
     }
     console.log(choiceValue);
-    console.log(computerChoice);
+    
+    return computerChoice;
 }
 
 function getHumanChoice () {
     let humanInput = prompt ("Rock, Paper or Scissors?", '');
     let humanChoice = humanInput.toLowerCase();
-    console.log(humanChoice);
+    
+    return humanChoice;
+}
+
+function playRound () {
+
+    let computerChoice = getComputerChoice();
+    let humanChoice = getHumanChoice();
+
+    console.log('Computer Choice : ' + computerChoice);
+    console.log('Human Choice : ' + humanChoice);
+
+    if (computerChoice == humanChoice) {
+        humanScore = 0;
+        computerScore = 0;
+    } else {
+            switch (computerChoice) {
+                case 'rock': 
+                switch (humanChoice) {
+                    case 'paper': 
+                        humanScore++;
+                        break;
+                    case 'scissors':
+                        computerScore++;
+                        break;
+                }
+                break;
+                case 'paper': 
+                switch (humanChoice) {
+                    case 'scissors': 
+                        humanScore++;
+                        break;
+                    case 'rock':
+                        computerScore++;
+                        break;
+                }
+                break;
+                case 'scissors':
+                    switch (humanChoice) {
+                    case 'rock': 
+                        humanScore++;
+                        break;
+                    case 'paper':
+                        computerScore++;
+                        break;
+                }
+                break;
+
+            }
+    }
+
+    console.log('Human : ' + humanScore + ' ; Computer : ' + computerScore);
+
 }

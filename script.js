@@ -24,7 +24,7 @@ function getComputerChoice () {
             computerChoice = 'scissors';
             break;
     }
-    console.log('Random Number : ' + choiceValue);
+    //console.log('Random Number : ' + choiceValue);
     
     return computerChoice;
 }
@@ -38,7 +38,7 @@ function getHumanChoice () {
 
 function playRound (round) {
 
-    console.log ('-----ROUND NO.' + round + '-----')
+    console.log ('-----ROUND NO.' + (round + 1) + '-----')
 
     let computerChoice = getComputerChoice();
     let humanChoice = getHumanChoice();
@@ -47,8 +47,10 @@ function playRound (round) {
     console.log('Human Choice : ' + humanChoice);
 
     if (computerChoice == humanChoice) {
+        // Do nothing. Don't update score. Don't do round++ either.
 
     } else if (humanChoice == 'rock' || humanChoice == 'paper' || humanChoice == 'scissors'){
+            // Ensure that user is entering the right options
             round++;
             switch (computerChoice) {
                 case 'rock': 
@@ -84,7 +86,8 @@ function playRound (round) {
 
             }
     } else {
-        
+        // In case of typos, do nothing. Don't do round++ either.
+
     }
 
     console.log('Human : ' + humanScore + ' ; Computer : ' + computerScore);

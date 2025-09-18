@@ -70,8 +70,10 @@ function restartGame() {
     humanScore = 0;
     computerScore = 0;
     finalResult.textContent = 'Choose your weapon!';
-    playerChoiceDom.textContent = '?';
-    computerChoiceDom.textContent = '?';
+    //playerChoiceDom.textContent = '?';
+    //computerChoiceDom.textContent = '?';
+    playerChoiceDom.src = 'img/question.webp';
+    computerChoiceDom.src = 'img/question.webp';
     playerScoreDom.textContent = 'Player: 0';
     computerScoreDom.textContent = 'Computer: 0';
     //scores.textContent = '? ?';
@@ -79,8 +81,11 @@ function restartGame() {
 
 function playRound () {
 
-    playerChoiceDom.textContent = `${humanChoice}`;
-    computerChoiceDom.textContent = `${computerChoice}`;
+    //playerChoiceDom.textContent = `${humanChoice}`;
+    //computerChoiceDom.textContent = `${computerChoice}`;
+    playerChoiceDom.src = `img/${humanChoice}.png`;
+    computerChoiceDom.src = `img/${computerChoice}.png`;
+    
 
 
     if (computerChoice == humanChoice) {

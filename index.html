@@ -4,24 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors Game</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id = "container"> 
+        <h1>Rock Paper Scissors Game</h1>
 
         <div id = "gameplay">
-            <button id = "rock">Rock</button>
-            <button id = "paper">Paper</button>
-            <button id = "scissors">Scissors</button>
+            <button class = "playbutton">
+                <img src="img/rock.png" width="150" id = "rock">
+            </button>
+            <button class = "playbutton">
+                <img src="img/paper.png" width="150" id = "paper">
+            </button>
+            <button class = "playbutton">
+                <img src="img/scissors.png" width="150" id = "scissors">
+            </button>
 
         </div>
 
         <div id = "results"> 
-            <p id="choices"></p>
-            <p id="scores"></p>
-            <p id="finalresult"></p>
+            <h2 id="finalresult">Choose your weapon!</h2>
+            <div id = "gameplay">
+                <div id = "player">
+                    <p id = "playerchoice">?</p>
+                    <p id = "playerscore">Player: 0</p>
+                </div>
+                <div id = "computer">
+                    <p id = computerchoice>?</p>
+                    <p id = "computerscore">Computer: 0</p>
+                </div>
+            </div>
         </div>
         
-        <div>
+        <div id="restart-button-container">
             <button id = "restart">Restart Game</button>
         </div>
 

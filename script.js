@@ -22,9 +22,13 @@ const restartButton = document.getElementById("restart");
 restartButton.addEventListener('click', restartGame);
 
 const results = document.querySelector("#results");
-const choices = document.querySelector("#choices");
-const scores = document.querySelector("#scores");
+//const scores = document.querySelector("#scores");
 const finalResult = document.querySelector("#finalresult");
+
+const playerChoiceDom = document.querySelector("#playerchoice");
+const computerChoiceDom = document.querySelector("#computerchoice");
+const playerScoreDom = document.querySelector("#playerscore");
+const computerScoreDom = document.querySelector("#computerscore");
 
 function getComputerChoice () {
     let choiceValue = parseInt(Math.random()*10)%3;
@@ -47,7 +51,7 @@ function getComputerChoice () {
 
 function handleClick(event) {
     if(humanScore >= 5 || computerScore >= 5) {
-        declareWinner();
+        //Do nothing
     } else {
         if (event.target.id === 'rock') {
         humanChoice = 'rock';
@@ -65,15 +69,19 @@ function restartGame() {
     round = 0;
     humanScore = 0;
     computerScore = 0;
-    choices.textContent = ' ';
-    scores.textContent = ' ';
-    finalResult.textContent = ' ';
+    finalResult.textContent = 'Choose your weapon!';
+    playerChoiceDom.textContent = '?';
+    computerChoiceDom.textContent = '?';
+    playerScoreDom.textContent = 'Player: 0';
+    computerScoreDom.textContent = 'Computer: 0';
+    //scores.textContent = '? ?';
 }
 
 function playRound () {
 
-    
-    choices.textContent = `Human Choice : ${humanChoice} | Computer Choice : ${computerChoice}`;
+    playerChoiceDom.textContent = `${humanChoice}`;
+    computerChoiceDom.textContent = `${computerChoice}`;
+
 
     if (computerChoice == humanChoice) {
         // Do nothing. Don't update score. Don't do round++ either.
@@ -118,16 +126,22 @@ function playRound () {
         // In case of typos, do nothing. Don't do round++ either.
 
     }
-    
-    scores.textContent = `Human : ${humanScore} | Computer : ${computerScore}`;
+    playerScoreDom.textContent = `Player: ${humanScore}`;
+    computerScoreDom.textContent = `Computer: ${computerScore}`
+
+    if(humanScore >= 5 || computerScore >= 5) {
+        declareWinner();
+    }
+
+    //scores.textContent = `Human : ${humanScore} | Computer : ${computerScore}`;
 }
 
 function declareWinner () {
         
     if (humanScore > computerScore) {     
-        finalResult.textContent = `You Win! ${humanScore} : ${computerScore} Press Restart to start a new game`;
+        finalResult.textContent = `You Win!`;
     }
     else {
-        finalResult.textContent = `You Lose! ${humanScore} : ${computerScore} Press Restart to start a new game`;
+        finalResult.textContent = `You Lose!`;
     }
 }

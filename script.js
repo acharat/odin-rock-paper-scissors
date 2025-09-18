@@ -1,17 +1,34 @@
-//GET Computer Choice -> Print the choice in console
-//GET Human Choice -> Print the choice in console
-//COMPUTE Score -> Logic for evaluating the winner
-//KEEP score
-//PLAY Game -> Total of 5 rounds
+// Sample code of community members: https://github.com/bombasticman/Rock-Paper-Scissors | https://bombasticman.github.io/Rock-Paper-Scissors/
+// https://ico-nickk.github.io/Rock-paper-scissors-game/ | https://github.com/Ico-Nickk/Rock-paper-scissors-game.git
+//https://musketbot.github.io/rock_paper_scissors/ | https://github.com/MusketBot/rock_paper_scissors
+// Most liked : https://michalosman.github.io/rock-paper-scissors/ | https://github.com/michalosman/rock-paper-scissors
+
 
 
 let humanScore = 0;
 let computerScore = 0;
-playGame();
+let humanChoice = '';
+let computerChoice = '';
+let round = 0;
+
+const rock = document.getElementById("rock");
+const paper = document.getElementById("paper");
+const scissors = document.getElementById("scissors");
+rock.addEventListener('click', handleClick);
+paper.addEventListener('click', handleClick);
+scissors.addEventListener('click', handleClick);
+
+const restartButton = document.getElementById("restart");
+restartButton.addEventListener('click', restartGame);
+
+const results = document.querySelector("#results");
+const choices = document.querySelector("#choices");
+const scores = document.querySelector("#scores");
+const finalResult = document.querySelector("#finalresult");
 
 function getComputerChoice () {
     let choiceValue = parseInt(Math.random()*10)%3;
-    let computerChoice = 'rock';
+    computerChoice = 'rock';
 
     switch (choiceValue) {
         case 0: 
@@ -24,27 +41,39 @@ function getComputerChoice () {
             computerChoice = 'scissors';
             break;
     }
-    //console.log('Random Number : ' + choiceValue);
     
     return computerChoice;
 }
 
-function getHumanChoice () {
-    let humanInput = prompt ("Rock, Paper or Scissors?", '');
-    let humanChoice = humanInput.toLowerCase();
-    
-    return humanChoice;
+function handleClick(event) {
+    if(humanScore >= 5 || computerScore >= 5) {
+        declareWinner();
+    } else {
+        if (event.target.id === 'rock') {
+        humanChoice = 'rock';
+        } else if (event.target.id === 'paper') {
+        humanChoice = 'paper';
+        } else if (event.target.id === 'scissors') {
+        humanChoice = 'scissors';
+        }
+        computerChoice = getComputerChoice();
+        playRound();
+    }
 }
 
-function playRound (round) {
+function restartGame() {
+    round = 0;
+    humanScore = 0;
+    computerScore = 0;
+    choices.textContent = ' ';
+    scores.textContent = ' ';
+    finalResult.textContent = ' ';
+}
 
-    console.log ('-----ROUND NO.' + (round + 1) + '-----')
+function playRound () {
 
-    let computerChoice = getComputerChoice();
-    let humanChoice = getHumanChoice();
-
-    console.log('Computer Choice : ' + computerChoice);
-    console.log('Human Choice : ' + humanChoice);
+    
+    choices.textContent = `Human Choice : ${humanChoice} | Computer Choice : ${computerChoice}`;
 
     if (computerChoice == humanChoice) {
         // Do nothing. Don't update score. Don't do round++ either.
@@ -89,23 +118,16 @@ function playRound (round) {
         // In case of typos, do nothing. Don't do round++ either.
 
     }
-
-    console.log('Human : ' + humanScore + ' ; Computer : ' + computerScore);
-    return round;
-
+    
+    scores.textContent = `Human : ${humanScore} | Computer : ${computerScore}`;
 }
 
-function playGame () {
-    
-
-        for (round = 0 ; round < 5; ) {
-            round = playRound(round);
-            console.log('Round: ' + round);
-        }
-
-        if (humanScore > computerScore) {
-            console.log ('Congratulations!! YOU WIN '+ humanScore + ':' + computerScore + '!!!');
-        } else {
-            console.log('Boo Hoo! YOU LOSE ' + humanScore + ':' + computerScore + '!!');
-        }
-        }
+function declareWinner () {
+        
+    if (humanScore > computerScore) {     
+        finalResult.textContent = `You Win! ${humanScore} : ${computerScore} Press Restart to start a new game`;
+    }
+    else {
+        finalResult.textContent = `You Lose! ${humanScore} : ${computerScore} Press Restart to start a new game`;
+    }
+}
